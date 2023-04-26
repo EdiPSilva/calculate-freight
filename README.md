@@ -1,1 +1,1 @@
-# calculate-freight
+# calculate-shipping
