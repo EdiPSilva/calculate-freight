@@ -1,8 +1,8 @@
 package br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence;
 
-import br.com.java.datacalculatefreight.application.freightRoute.persistence.FreightRouteEntity;
-import br.com.java.datacalculatefreight.application.rangeFreight.persistence.RangeFreightEntity;
-import br.com.java.datacalculatefreight.application.typeDelivery.persistence.TypeDeliveryEntity;
+import br.com.java.calculatefreight.application.freightRoute.persistence.FreightRouteEntity;
+import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightEntity;
+import br.com.java.calculatefreight.application.typeDelivery.persistence.TypeDeliveryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

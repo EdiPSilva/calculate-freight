@@ -1,6 +1,6 @@
 package br.com.java.calculatefreight.exceptions;
-import br.com.java.datacalculatefreight.configuration.MessageCodeEnum;
-import br.com.java.datacalculatefreight.configuration.MessageConfiguration;
+import br.com.java.calculatefreight.configuration.MessageCodeEnum;
+import br.com.java.calculatefreight.configuration.MessageConfiguration;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

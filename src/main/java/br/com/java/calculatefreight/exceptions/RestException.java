@@ -1,7 +1,7 @@
 package br.com.java.calculatefreight.exceptions;
 
-import br.com.java.datacalculatefreight.configuration.MessageCodeEnum;
-import br.com.java.datacalculatefreight.configuration.MessageConfiguration;
+import br.com.java.calculatefreight.configuration.MessageCodeEnum;
+import br.com.java.calculatefreight.configuration.MessageConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

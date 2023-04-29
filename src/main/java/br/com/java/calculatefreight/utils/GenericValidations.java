@@ -1,10 +1,10 @@
 package br.com.java.calculatefreight.utils;
 
-import br.com.java.datacalculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeEnum;
-import br.com.java.datacalculatefreight.application.freightRoute.persistence.StatesEnum;
-import br.com.java.datacalculatefreight.configuration.MessageCodeEnum;
-import br.com.java.datacalculatefreight.configuration.MessageConfiguration;
-import br.com.java.datacalculatefreight.exceptions.CustomException;
+import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeEnum;
+import br.com.java.calculatefreight.application.freightRoute.persistence.StatesEnum;
+import br.com.java.calculatefreight.configuration.MessageCodeEnum;
+import br.com.java.calculatefreight.configuration.MessageConfiguration;
+import br.com.java.calculatefreight.exceptions.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
