@@ -8,13 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FreightRouteRepository extends JpaRepository<FreightRouteEntity, Long> {
 
-    public FreightRouteEntity findByStartPostalCode(String startPostalCode);
+    @Query("select f from FreightRouteEntity f where :postalCode between f.startPostalCode and f.endPostalCode and f.active = 'true'")
+    public FreightRouteEntity findFreightRouteEntityByPostalCode(@Param("postalCode") String postalCode);
 
-    public FreightRouteEntity findByEndPostalCode(String endPostalCode);
-
-    @Query("select f.id from FreightRouteEntity f where f.startPostalCode = :postalCode")
-    public Long findFreightRouteEntityByStartPostalCode(@Param("postalCode") String postalCode);
-
-    @Query("select f.id from FreightRouteEntity f where f.endPostalCode = :postalCode")
-    public Long findFreightRouteEntityByEndPostalCode(@Param("postalCode") String postalCode);
 }

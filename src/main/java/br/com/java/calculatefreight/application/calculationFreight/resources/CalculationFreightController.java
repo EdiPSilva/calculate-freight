@@ -5,7 +5,6 @@ import br.com.java.calculatefreight.utils.DefaultLog;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.models.HttpMethod;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +26,8 @@ public class CalculationFreightController {
 
     @ApiOperation("Cálculo de frete")
     @PostMapping(value = "/v1/")
-    public ResponseEntity<CalculationFreightResponse> calculateFreight(@Valid @RequestBody CalculationFreightRequest calculationFreightRequest) {
+    public ResponseEntity<CalculationFreightResponse> create(@Valid @RequestBody CalculationFreightRequest calculationFreightRequest) {
         defaultLog.printLogExecutedEndpoint(HttpMethod.POST, API_V1);
-        return new ResponseEntity<>(calculationFreightService.calculateFreight(calculationFreightRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(calculationFreightService.create(calculationFreightRequest), HttpStatus.CREATED);
     }
 }
