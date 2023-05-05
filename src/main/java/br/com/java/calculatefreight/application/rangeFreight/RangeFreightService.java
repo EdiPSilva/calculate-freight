@@ -2,6 +2,7 @@ package br.com.java.calculatefreight.application.rangeFreight;
 
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeDto;
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeRangeFreightEntity;
+import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightDto;
 import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightEntity;
 import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightRepository;
 import br.com.java.calculatefreight.configuration.MessageCodeEnum;
@@ -12,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,11 +29,11 @@ public class RangeFreightService {
     private RangeFreightRepository rangeFreightRepository;
 
     @Transactional(readOnly = true)
-    public RangeFreightEntity getFreightValue(final CalculationTypeDto calculationTypeDto, final List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList) {
+    public RangeFreightDto getFreightValue(final CalculationTypeDto calculationTypeDto, final List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList) {
         final List<RangeFreightEntity> rangeFreightEntityList = rangeFreightEntityList(calculationTypeRangeFreightEntityList);
         final RangeFreightEntity rangeFreightEntity = getRangeFreightEntityByList(rangeFreightEntityList, calculationTypeDto);
         validateShippingCompany(rangeFreightEntity);
-        return rangeFreightEntity;
+        return RangeFreightDto.getInstance(rangeFreightEntity, calculateFreight(rangeFreightEntity.getFreightValue(), rangeFreightEntity.getSurplusValue(), calculationTypeDto));
     }
 
     private List<RangeFreightEntity> rangeFreightEntityList(final List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList) {
@@ -63,5 +66,13 @@ public class RangeFreightService {
         if (Boolean.FALSE.equals(rangeFreightEntity.getShippingCompanyEntity().getActive())) {
             throw new CustomException(messageConfiguration.getMessageByCode(MessageCodeEnum.SHIPPING_COMPANY_INACTIVE));
         }
+    }
+
+    private Double calculateFreight(Double freightValue, final Double surplusValue, final CalculationTypeDto calculationTypeDto) {
+        if (calculationTypeDto.getValue() > freightValue) {
+            freightValue += (freightValue / 100) * surplusValue;
+        }
+        final BigDecimal bigDecimal = new BigDecimal(freightValue).setScale(2, RoundingMode.HALF_UP);
+        return bigDecimal.doubleValue();
     }
 }

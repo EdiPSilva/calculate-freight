@@ -1,6 +1,5 @@
 package br.com.java.calculatefreight.application.calculationFreight;
 
-import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightDto;
 import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightEntity;
 import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightRepository;
 import br.com.java.calculatefreight.application.calculationFreight.resources.CalculationFreightRequest;
@@ -13,6 +12,7 @@ import br.com.java.calculatefreight.application.company.persistence.CompanyEntit
 import br.com.java.calculatefreight.application.freightRoute.FreightRouteService;
 import br.com.java.calculatefreight.application.freightRoute.persistence.FreightRouteEntity;
 import br.com.java.calculatefreight.application.rangeFreight.RangeFreightService;
+import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightDto;
 import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightEntity;
 import br.com.java.calculatefreight.configuration.MessageCodeEnum;
 import br.com.java.calculatefreight.configuration.MessageConfiguration;
@@ -21,6 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -56,26 +59,16 @@ public class CalculationFreightService {
         final CalculationTypeDto calculationTypeDto = CalculationTypeDto.from(cubage, calculationFreightRequest.getWeight());
         final FreightRouteEntity freightRouteEntity = freightRouteService.getFreightRouteEntityByPostalCode(calculationFreightRequest.getDestinyPostalCode());
         final List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList = calculationTypeRangeFreightService.getCalculationTypeRangeFreightEntity(calculationTypeDto, freightRouteEntity.getId());
-        final RangeFreightEntity rangeFreightEntity = rangeFreightService.getFreightValue(calculationTypeDto, calculationTypeRangeFreightEntityList);
+        final RangeFreightDto rangeFreightDto = rangeFreightService.getFreightValue(calculationTypeDto, calculationTypeRangeFreightEntityList);
 
-        final CalculationFreightEntity calculationFreightEntity = calculationFreightRequest.to();
-        calculationFreightEntity.setFreightValue(calculateFreight(rangeFreightEntity, calculationTypeDto));
+        final CalculationFreightEntity calculationFreightEntity = calculationFreightRequest.to(rangeFreightDto,
+                companyEntity,
+                LocalDate.now().plusDays(freightRouteEntity.getDeliveryDays()),
+                cubage);
 
-        final CalculationFreightDto calculationFreightDto = new CalculationFreightDto();
-        calculationFreightDto.setCalculationFreightEntity(calculationFreightEntity);
-        calculationFreightDto.setShippingCompanyEntity(rangeFreightEntity.getShippingCompanyEntity());
-        calculationFreightDto.setTypeDelivery(calculationTypeRangeFreightService.getTypeDelivery(calculationTypeRangeFreightEntityList, rangeFreightEntity));
-        calculationFreightDto.setDeliveryDay(freightRouteEntity.getDeliveryDays());
-
-        return CalculationFreightResponse.from(calculationFreightDto);
-    }
-
-    private Double calculateFreight(final RangeFreightEntity rangeFreightEntity, final CalculationTypeDto calculationTypeDto) {
-        Double freightValue = rangeFreightEntity.getFreightValue();
-        if (calculationTypeDto.getValue() > freightValue) {
-            freightValue += (freightValue / 100) * rangeFreightEntity.getSurplusValue();
-        }
-        return freightValue;
+        return CalculationFreightResponse.from(calculationFreightRepository.save(calculationFreightEntity),
+                rangeFreightDto.getRangeFreightEntity().getShippingCompanyEntity(),
+                calculationTypeRangeFreightService.getTypeDelivery(calculationTypeRangeFreightEntityList, rangeFreightDto.getRangeFreightEntity()));
     }
 
     private Double calculateCubage(final CalculationFreightRequest calculationFreightRequest) {

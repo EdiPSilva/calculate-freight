@@ -1,6 +1,6 @@
 package br.com.java.calculatefreight.application.calculationFreight.resources;
 
-import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightDto;
+import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightEntity;
 import br.com.java.calculatefreight.application.shippingCompany.persistence.ShippingCompanyEntity;
 import br.com.java.calculatefreight.application.shippingCompany.resources.ShippingCompanyResponse;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,20 +15,24 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CalculationFreightResponse {
 
-    public CalculationFreightResponse(final CalculationFreightDto calculationFreightDto) {
-        this.id = calculationFreightDto.getCalculationFreightEntity().getId();
-        this.senderPostalCode = calculationFreightDto.getCalculationFreightEntity().getSenderPostalCode();
-        this.destinyPostalCode = calculationFreightDto.getCalculationFreightEntity().getDestinyPostalCode();
-        this.width = calculationFreightDto.getCalculationFreightEntity().getWidth();
-        this.height = calculationFreightDto.getCalculationFreightEntity().getHeight();
-        this.length = calculationFreightDto.getCalculationFreightEntity().getLength();
-        this.cubage = calculationFreightDto.getCalculationFreightEntity().getCubage();
-        this.weight = calculationFreightDto.getCalculationFreightEntity().getWeight();
-        this.freightValue = formatDouble(calculationFreightDto.getCalculationFreightEntity().getFreightValue());
-        this.dateCreate = calculationFreightDto.getCalculationFreightEntity().getDateCreate();
-        setShippingCompanyResponse(calculationFreightDto.getShippingCompanyEntity());
-        this.typeDelivery = calculationFreightDto.getTypeDelivery();
-        this.setDeliveryDay(calculationFreightDto.getDeliveryDay());
+
+    private CalculationFreightResponse() {
+
+    }
+
+    private CalculationFreightResponse(final CalculationFreightEntity calculationFreightEntity, final ShippingCompanyEntity shippingCompanyEntity, final String typeDelivery) {
+        this.id = calculationFreightEntity.getId();
+        this.destinyPostalCode = calculationFreightEntity.getDestinyPostalCode();
+        this.width = calculationFreightEntity.getWidth();
+        this.height = calculationFreightEntity.getHeight();
+        this.length = calculationFreightEntity.getLength();
+        this.cubage = calculationFreightEntity.getCubage();
+        this.weight = calculationFreightEntity.getWeight();
+        this.freightValue = formatDouble(calculationFreightEntity.getFreightValue());
+        this.dateCreate = calculationFreightEntity.getDateCreate();
+        setShippingCompanyResponse(shippingCompanyEntity);
+        this.typeDelivery = typeDelivery;
+        this.deliveryDay = calculationFreightEntity.getDelivaryDay();
     }
 
     private Double formatDouble(final Double value) {
@@ -39,10 +43,6 @@ public class CalculationFreightResponse {
         if (shippingCompanyEntity != null) {
             this.shippingCompany = ShippingCompanyResponse.from(shippingCompanyEntity);
         }
-    }
-
-    private void setDeliveryDay(final Long days) {
-        this.deliveryDay = LocalDate.now().plusDays(days);
     }
 
     @ApiModelProperty(notes = "Id do cálculo de frete", example = "1", required = true)
@@ -86,7 +86,7 @@ public class CalculationFreightResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate deliveryDay;
 
-    public static CalculationFreightResponse from(final CalculationFreightDto calculationFreightDto) {
-        return new CalculationFreightResponse(calculationFreightDto);
+    public static CalculationFreightResponse from(final CalculationFreightEntity calculationFreightEntity, final ShippingCompanyEntity shippingCompanyEntity, final String typeDelivery) {
+        return new CalculationFreightResponse(calculationFreightEntity, shippingCompanyEntity, typeDelivery);
     }
 }

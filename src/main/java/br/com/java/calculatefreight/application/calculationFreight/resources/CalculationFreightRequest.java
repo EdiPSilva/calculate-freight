@@ -1,6 +1,9 @@
 package br.com.java.calculatefreight.application.calculationFreight.resources;
 
 import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightEntity;
+import br.com.java.calculatefreight.application.company.persistence.CompanyEntity;
+import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightDto;
+import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +11,8 @@ import lombok.Getter;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Builder
@@ -16,10 +21,6 @@ public class CalculationFreightRequest {
     @Min(value = 1L, message = "Valor mínimo é 1")
     @ApiModelProperty(notes = "Empresa", example = "1", required = true)
     private Long company;
-
-    @Size(min = 8, max = 8, message = "Remetente inválido")
-    @ApiModelProperty(notes = "Remetente", example = "13052110", required = true)
-    private String senderPostalCode;
 
     @NotBlank
     @Size(min = 8, max = 8, message = "Destinatário inválido")
@@ -42,14 +43,19 @@ public class CalculationFreightRequest {
     @ApiModelProperty(notes = "Peso", example = "0.5", required = true)
     private Double weight;
 
-    public CalculationFreightEntity to() {
+    public CalculationFreightEntity to(final RangeFreightDto rangeFreightDto, final CompanyEntity companyEntity, final LocalDate delivaryDay, final Double cubage) {
         return CalculationFreightEntity.builder()
-                .senderPostalCode(this.senderPostalCode)
+                .companyEntity(companyEntity)
+                .rangeFreightEntity(rangeFreightDto.getRangeFreightEntity())
+                .delivaryDay(delivaryDay)
                 .destinyPostalCode(this.destinyPostalCode)
                 .width(this.width)
                 .height(this.height)
                 .length(this.length)
+                .cubage(cubage)
                 .weight(this.weight)
+                .freightValue(rangeFreightDto.getFreightValue())
+                .dateCreate(LocalDateTime.now())
                 .build();
     }
 }
