@@ -1,7 +1,6 @@
 package br.com.java.calculatefreight.application.calculationTypeRangeFreight;
 
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeDto;
-import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeEnum;
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeRangeFreightEntity;
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeRangeFreightRepository;
 import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightEntity;
