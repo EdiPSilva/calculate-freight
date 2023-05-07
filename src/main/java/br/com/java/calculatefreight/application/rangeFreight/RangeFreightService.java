@@ -33,7 +33,7 @@ public class RangeFreightService {
         final List<RangeFreightEntity> rangeFreightEntityList = rangeFreightEntityList(calculationTypeRangeFreightEntityList);
         final RangeFreightEntity rangeFreightEntity = getRangeFreightEntityByList(rangeFreightEntityList, calculationTypeDto);
         validateShippingCompany(rangeFreightEntity);
-        return RangeFreightDto.getInstance(rangeFreightEntity, calculateFreight(rangeFreightEntity.getFreightValue(), rangeFreightEntity.getSurplusValue(), calculationTypeDto));
+        return RangeFreightDto.getInstance(rangeFreightEntity, calculateFreight(rangeFreightEntity.getFreightValue(), rangeFreightEntity.getSurplusValue(), rangeFreightEntity.getEndValue(), calculationTypeDto));
     }
 
     private List<RangeFreightEntity> rangeFreightEntityList(final List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList) {
@@ -57,7 +57,7 @@ public class RangeFreightService {
             }
         }
         if (rangeFreightEntity == null) {
-            rangeFreightEntity = rangeFreightEntityList.get(rangeFreightEntityList.size());
+            rangeFreightEntity = rangeFreightEntityList.get(rangeFreightEntityList.size() - 1);
         }
         return rangeFreightEntity;
     }
@@ -68,8 +68,8 @@ public class RangeFreightService {
         }
     }
 
-    private Double calculateFreight(Double freightValue, final Double surplusValue, final CalculationTypeDto calculationTypeDto) {
-        if (calculationTypeDto.getValue() > freightValue) {
+    private Double calculateFreight(Double freightValue, final Double surplusValue, final Double endValue, final CalculationTypeDto calculationTypeDto) {
+        if (calculationTypeDto.getValue() > endValue) {
             freightValue += (freightValue / 100) * surplusValue;
         }
         final BigDecimal bigDecimal = new BigDecimal(freightValue).setScale(2, RoundingMode.HALF_UP);

@@ -75,4 +75,24 @@ public class CalculationTypeRangeFreightServiceTeste {
         assertEquals(calculationTypeRangeFreightMock.getTypeDeliveryEntity().getId(), calculationTypeRangeFreightResult.getTypeDeliveryEntity().getId());
         assertEquals(calculationTypeRangeFreightMock.getDateCreate(), calculationTypeRangeFreightResult.getDateCreate());
     }
+
+    @Test
+    @DisplayName("deve retornar null quando não localizado tipo de entrega")
+    public void shouldReturnNullWhenNotFoundTypeDelivery(){
+        final CalculationTypeRangeFreightEntity calculationTypeRangeFreightEntity = CalculationTypeRangeFreightEntityBuilder.getInstance().getCalculationTypeRangeFreightEntity();
+        calculationTypeRangeFreightEntity.setTypeDeliveryEntity(null);
+        final List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList = Arrays.asList(calculationTypeRangeFreightEntity);
+        final String typeDelivery = calculationTypeRangeFreightService.getTypeDelivery(calculationTypeRangeFreightEntityList, calculationTypeRangeFreightEntity.getRangeFreightEntity());
+        assertNull(typeDelivery);
+    }
+
+    @Test
+    @DisplayName("não deve retornar null quando localizado tipo de entrega")
+    public void shouldNotReturnNullWhenFoundTypeDelivery(){
+        final CalculationTypeRangeFreightEntity calculationTypeRangeFreightEntity = CalculationTypeRangeFreightEntityBuilder.getInstance().getCalculationTypeRangeFreightEntity();
+        final List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList = Arrays.asList(calculationTypeRangeFreightEntity);
+        final String typeDelivery = calculationTypeRangeFreightService.getTypeDelivery(calculationTypeRangeFreightEntityList, calculationTypeRangeFreightEntity.getRangeFreightEntity());
+        assertNotNull(typeDelivery);
+        assertEquals(typeDelivery, calculationTypeRangeFreightEntity.getTypeDeliveryEntity().getType());
+    }
 }

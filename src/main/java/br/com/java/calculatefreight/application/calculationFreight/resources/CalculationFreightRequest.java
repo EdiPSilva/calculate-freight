@@ -43,7 +43,7 @@ public class CalculationFreightRequest {
     @ApiModelProperty(notes = "Peso", example = "0.5", required = true)
     private Double weight;
 
-    public CalculationFreightEntity to(final RangeFreightDto rangeFreightDto, final CompanyEntity companyEntity, final LocalDate delivaryDay, final Double cubage) {
+    public CalculationFreightEntity to(final RangeFreightDto rangeFreightDto, final CompanyEntity companyEntity, final LocalDate delivaryDay) {
         return CalculationFreightEntity.builder()
                 .companyEntity(companyEntity)
                 .rangeFreightEntity(rangeFreightDto.getRangeFreightEntity())
@@ -52,10 +52,14 @@ public class CalculationFreightRequest {
                 .width(this.width)
                 .height(this.height)
                 .length(this.length)
-                .cubage(cubage)
+                .cubage(getCubage())
                 .weight(this.weight)
                 .freightValue(rangeFreightDto.getFreightValue())
                 .dateCreate(LocalDateTime.now())
                 .build();
+    }
+
+    public Double getCubage() {
+        return this.height * this.length * this.width;
     }
 }

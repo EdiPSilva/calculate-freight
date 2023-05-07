@@ -51,9 +51,6 @@ public class CalculationFreightResponse {
     @ApiModelProperty(notes = "Transportadora do frete", example = "1", required = false)
     private ShippingCompanyResponse shippingCompany;
 
-    @ApiModelProperty(notes = "Remetente cep", example = "1", required = true)
-    private String senderPostalCode;
-
     @ApiModelProperty(notes = "Destino cep", example = "1", required = true)
     private String destinyPostalCode;
 

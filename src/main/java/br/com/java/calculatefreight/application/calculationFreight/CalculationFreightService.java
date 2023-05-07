@@ -20,9 +20,6 @@ import br.com.java.calculatefreight.utils.GenericValidations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -54,24 +51,18 @@ public class CalculationFreightService {
     public CalculationFreightResponse create(final CalculationFreightRequest calculationFreightRequest) {
         final CompanyEntity companyEntity = companyService.getCompanyEntityById(calculationFreightRequest.getCompany());
         genericValidations.validatePostalCode(calculationFreightRequest.getDestinyPostalCode(), MessageCodeEnum.INVALID_POST_CODE);
-        final Double cubage = calculateCubage(calculationFreightRequest);
 
-        final CalculationTypeDto calculationTypeDto = CalculationTypeDto.from(cubage, calculationFreightRequest.getWeight());
+        final CalculationTypeDto calculationTypeDto = CalculationTypeDto.from(calculationFreightRequest.getCubage(), calculationFreightRequest.getWeight());
         final FreightRouteEntity freightRouteEntity = freightRouteService.getFreightRouteEntityByPostalCode(calculationFreightRequest.getDestinyPostalCode());
         final List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList = calculationTypeRangeFreightService.getCalculationTypeRangeFreightEntity(calculationTypeDto, freightRouteEntity.getId());
         final RangeFreightDto rangeFreightDto = rangeFreightService.getFreightValue(calculationTypeDto, calculationTypeRangeFreightEntityList);
 
         final CalculationFreightEntity calculationFreightEntity = calculationFreightRequest.to(rangeFreightDto,
                 companyEntity,
-                LocalDate.now().plusDays(freightRouteEntity.getDeliveryDays()),
-                cubage);
+                LocalDate.now().plusDays(freightRouteEntity.getDeliveryDays()));
 
         return CalculationFreightResponse.from(calculationFreightRepository.save(calculationFreightEntity),
                 rangeFreightDto.getRangeFreightEntity().getShippingCompanyEntity(),
                 calculationTypeRangeFreightService.getTypeDelivery(calculationTypeRangeFreightEntityList, rangeFreightDto.getRangeFreightEntity()));
-    }
-
-    private Double calculateCubage(final CalculationFreightRequest calculationFreightRequest) {
-        return calculationFreightRequest.getWidth() * calculationFreightRequest.getHeight() * calculationFreightRequest.getLength();
     }
 }
