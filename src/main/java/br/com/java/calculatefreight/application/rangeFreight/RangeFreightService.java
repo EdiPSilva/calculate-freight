@@ -37,7 +37,7 @@ public class RangeFreightService {
     }
 
     private List<RangeFreightEntity> rangeFreightEntityList(final List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList) {
-        final List<Long> idList = calculationTypeRangeFreightEntityList.stream().map(CalculationTypeRangeFreightEntity::getId).collect(Collectors.toList());
+        final List<Long> idList = calculationTypeRangeFreightEntityList.stream().map(calculationTypeRangeFreight -> calculationTypeRangeFreight.getRangeFreightEntity().getId()).collect(Collectors.toList());
         final List<RangeFreightEntity> rangeFreightEntityList = rangeFreightRepository.findRangeFreight(idList)
                 .stream()
                 .sorted(Comparator.comparingDouble(RangeFreightEntity::getEndValue))

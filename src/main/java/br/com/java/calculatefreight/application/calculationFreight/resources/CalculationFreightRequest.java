@@ -1,5 +1,6 @@
 package br.com.java.calculatefreight.application.calculationFreight.resources;
 
+import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightDto;
 import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightEntity;
 import br.com.java.calculatefreight.application.company.persistence.CompanyEntity;
 import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightDto;
@@ -57,6 +58,37 @@ public class CalculationFreightRequest {
                 .freightValue(rangeFreightDto.getFreightValue())
                 .dateCreate(LocalDateTime.now())
                 .build();
+    }
+
+    public CalculationFreightEntity to(final CalculationFreightDto calculationFreightDto, final CompanyEntity companyEntity) {
+        return CalculationFreightEntity.builder()
+                .companyEntity(companyEntity)
+                .rangeFreightEntity(calculationFreightDto.getRangeFreightDto().getRangeFreightEntity())
+                .delivaryDay(calculationFreightDto.getDelivaryDay())
+                .destinyPostalCode(this.destinyPostalCode)
+                .width(this.width)
+                .height(this.height)
+                .length(this.length)
+                .cubage(getCubage())
+                .weight(this.weight)
+                .freightValue(calculationFreightDto.getRangeFreightDto().getFreightValue())
+                .dateCreate(LocalDateTime.now())
+                .build();
+    }
+
+    public CalculationFreightEntity to(final CalculationFreightEntity calculationFreightEntity, final CalculationFreightDto calculationFreightDto, final CompanyEntity companyEntity) {
+        calculationFreightEntity.setDateUpdate(LocalDateTime.now());
+        calculationFreightEntity.setCompanyEntity(companyEntity);
+        calculationFreightEntity.setRangeFreightEntity(calculationFreightDto.getRangeFreightDto().getRangeFreightEntity());
+        calculationFreightEntity.setDelivaryDay(calculationFreightDto.getDelivaryDay());
+        calculationFreightEntity.setDestinyPostalCode(this.destinyPostalCode);
+        calculationFreightEntity.setCubage(getCubage());
+        calculationFreightEntity.setWidth(this.width);
+        calculationFreightEntity.setHeight(this.height);
+        calculationFreightEntity.setLength(this.length);
+        calculationFreightEntity.setWeight(this.weight);
+        calculationFreightEntity.setFreightValue(calculationFreightDto.getRangeFreightDto().getFreightValue());
+        return calculationFreightEntity;
     }
 
     public Double getCubage() {

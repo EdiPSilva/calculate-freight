@@ -1,6 +1,7 @@
 package br.com.java.calculatefreight.application.calculationFreight.persistence;
 
 import br.com.java.calculatefreight.application.company.persistence.CompanyEntity;
+import br.com.java.calculatefreight.application.orders.persistence.OrdersEntity;
 import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,6 +33,9 @@ public class CalculationFreightEntity {
     @JoinColumn(name = "range_freight_id")
     private RangeFreightEntity rangeFreightEntity;
 
+    //@OneToOne(fetch = FetchType.LAZY, mappedBy = "calculationFreightEntity")
+    //private OrdersEntity ordersEntity;
+
     @Column(name = "delivery_day")
     private LocalDate delivaryDay;
 
@@ -39,7 +43,7 @@ public class CalculationFreightEntity {
     private String destinyPostalCode;
 
     @Column(name = "width")
-    private Double width;
+    private Double width;//TODO - tocar tipo de numeric(5,4) para numeric(10,2)
 
     @Column(name = "height")
     private Double height;

@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CalculationFreightRepository extends JpaRepository<CalculationFreightEntity, Long> {
+
+
 }

@@ -1,5 +1,6 @@
 package br.com.java.calculatefreight.application.calculationFreight.resources;
 
+import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightDto;
 import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightEntity;
 import br.com.java.calculatefreight.application.shippingCompany.persistence.ShippingCompanyEntity;
 import br.com.java.calculatefreight.application.shippingCompany.resources.ShippingCompanyResponse;
@@ -20,7 +21,8 @@ public class CalculationFreightResponse {
 
     }
 
-    private CalculationFreightResponse(final CalculationFreightEntity calculationFreightEntity, final ShippingCompanyEntity shippingCompanyEntity, final String typeDelivery) {
+    private CalculationFreightResponse(final CalculationFreightDto calculationFreightDto) {
+        final CalculationFreightEntity calculationFreightEntity = calculationFreightDto.getCalculationFreightEntity();
         this.id = calculationFreightEntity.getId();
         this.destinyPostalCode = calculationFreightEntity.getDestinyPostalCode();
         this.width = calculationFreightEntity.getWidth();
@@ -30,8 +32,8 @@ public class CalculationFreightResponse {
         this.weight = calculationFreightEntity.getWeight();
         this.freightValue = formatDouble(calculationFreightEntity.getFreightValue());
         this.dateCreate = calculationFreightEntity.getDateCreate();
-        setShippingCompanyResponse(shippingCompanyEntity);
-        this.typeDelivery = typeDelivery;
+        setShippingCompanyResponse(calculationFreightEntity.getRangeFreightEntity().getShippingCompanyEntity());
+        this.typeDelivery = calculationFreightDto.getTypeDelivery();
         this.deliveryDay = calculationFreightEntity.getDelivaryDay();
     }
 
@@ -83,7 +85,7 @@ public class CalculationFreightResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate deliveryDay;
 
-    public static CalculationFreightResponse from(final CalculationFreightEntity calculationFreightEntity, final ShippingCompanyEntity shippingCompanyEntity, final String typeDelivery) {
-        return new CalculationFreightResponse(calculationFreightEntity, shippingCompanyEntity, typeDelivery);
+    public static CalculationFreightResponse from(final CalculationFreightDto calculationFreightDto) {
+        return new CalculationFreightResponse(calculationFreightDto);
     }
 }

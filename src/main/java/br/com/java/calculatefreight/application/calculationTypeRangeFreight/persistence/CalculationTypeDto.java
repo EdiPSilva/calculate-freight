@@ -1,8 +1,12 @@
 package br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence;
 
 import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 
 @Getter
+@Setter
 public class CalculationTypeDto {
 
     private CalculationTypeDto() {
@@ -17,6 +21,10 @@ public class CalculationTypeDto {
     private CalculationTypeEnum calculationTypeEnum;
 
     private Double value;
+
+    private List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList;
+
+    private String typeDelivery;
 
     public static CalculationTypeDto from(final Double cubage, final Double weight) {
         Double bigger = cubage;
