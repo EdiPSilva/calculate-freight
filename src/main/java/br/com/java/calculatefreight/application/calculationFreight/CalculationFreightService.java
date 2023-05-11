@@ -77,7 +77,7 @@ public class CalculationFreightService {
         } else {
             calculationFreightEntity = calculationFreightRequest.to(calculationFreightDto, companyEntity);
         }
-        return  calculationFreightRepository.save(calculationFreightEntity);
+        return calculationFreightRepository.save(calculationFreightEntity);
     }
 
     private CalculationFreightEntity getCalculationFreightEntity(final Long id) {

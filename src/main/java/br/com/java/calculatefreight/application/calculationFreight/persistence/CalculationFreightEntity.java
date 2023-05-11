@@ -43,7 +43,7 @@ public class CalculationFreightEntity {
     private String destinyPostalCode;
 
     @Column(name = "width")
-    private Double width;//TODO - tocar tipo de numeric(5,4) para numeric(10,2)
+    private Double width;
 
     @Column(name = "height")
     private Double height;
