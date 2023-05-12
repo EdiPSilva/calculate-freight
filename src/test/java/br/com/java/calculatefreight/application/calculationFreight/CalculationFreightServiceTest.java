@@ -91,7 +91,7 @@ public class CalculationFreightServiceTest {
         calculationFreightEntity.setId(1L);
         when(calculationFreightRepository.save(Mockito.any())).thenReturn(calculationFreightEntity);
 
-        final CalculationFreightResponse calculationFreightResponse = calculationFreightService.create(calculationFreightRequest);
+        final CalculationFreightResponse calculationFreightResponse =  assertDoesNotThrow(() -> calculationFreightService.create(calculationFreightRequest));
 
         assertNotNull(calculationFreightResponse);
         assertEquals(calculationFreightResponse.getShippingCompany().getId(), rangeFreightDto.getRangeFreightEntity().getShippingCompanyEntity().getId());
@@ -140,7 +140,7 @@ public class CalculationFreightServiceTest {
 
         when(calculationFreightRepository.save(Mockito.any())).thenReturn(calculationFreightEntity);
 
-        final CalculationFreightDto calculationFreightDto = calculationFreightService.calculate(calculationFreightRequest, companyEntity, calculationFreightEntityId);
+        final CalculationFreightDto calculationFreightDto =  assertDoesNotThrow(() -> calculationFreightService.calculate(calculationFreightRequest, companyEntity, calculationFreightEntityId));
         assertNotNull(calculationFreightDto);
         assertEquals(calculationFreightDto.getCalculationFreightEntity().getRangeFreightEntity().getShippingCompanyEntity().getId(), rangeFreightDto.getRangeFreightEntity().getShippingCompanyEntity().getId());
         assertEquals(calculationFreightDto.getCalculationFreightEntity().getDestinyPostalCode(), calculationFreightRequest.getDestinyPostalCode());

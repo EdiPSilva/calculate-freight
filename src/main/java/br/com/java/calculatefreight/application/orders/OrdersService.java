@@ -11,7 +11,6 @@ import br.com.java.calculatefreight.application.orders.resources.OrdersResponse;
 import br.com.java.calculatefreight.configuration.MessageCodeEnum;
 import br.com.java.calculatefreight.configuration.MessageConfiguration;
 import br.com.java.calculatefreight.exceptions.CustomException;
-import br.com.java.calculatefreight.utils.GenericValidations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
