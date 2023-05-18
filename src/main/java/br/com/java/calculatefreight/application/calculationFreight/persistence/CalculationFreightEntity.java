@@ -33,9 +33,6 @@ public class CalculationFreightEntity {
     @JoinColumn(name = "range_freight_id")
     private RangeFreightEntity rangeFreightEntity;
 
-    //@OneToOne(fetch = FetchType.LAZY, mappedBy = "calculationFreightEntity")
-    //private OrdersEntity ordersEntity;
-
     @Column(name = "delivery_day")
     private LocalDate delivaryDay;
 
