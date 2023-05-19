@@ -1,5 +1,4 @@
 package br.com.java.calculatefreight.application.orders;
-
 import br.com.java.calculatefreight.application.calculationFreight.CalculationFreightService;
 import br.com.java.calculatefreight.application.calculationFreight.builders.CalculationFreightDtoBuilder;
 import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightDto;
@@ -22,7 +21,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -49,7 +47,7 @@ public class OrdersServiceTest {
     public void shouldReturnErrorWhenTheOrderNumberWasInvalid(){
         final OrdersRequest ordersRequest = OrdersRequestBuilder.getInstance().getOrdersRequest();
 
-        final CompanyEntity companyEntity = CompanyEntityBuilder.getBasicCompanyEntity().getCompanyEntity();
+        final CompanyEntity companyEntity = CompanyEntityBuilder.getInstance().getCompanyEntity();
         when(companyService.getCompanyEntityById(ordersRequest.getCalculationFreight().getCompany())).thenReturn(companyEntity);
 
         final OrdersEntity ordersEntity = OrdersEntityBuilder.getInstance().getOrdersEntity();
@@ -65,7 +63,7 @@ public class OrdersServiceTest {
     public void shouldNotReturnErrorWhenTheOrderWasValidInTheCreate(){
         final OrdersRequest ordersRequest = OrdersRequestBuilder.getInstance().getOrdersRequest();
 
-        final CompanyEntity companyEntity = CompanyEntityBuilder.getBasicCompanyEntity().getCompanyEntity();
+        final CompanyEntity companyEntity = CompanyEntityBuilder.getInstance().getCompanyEntity();
         when(companyService.getCompanyEntityById(ordersRequest.getCalculationFreight().getCompany())).thenReturn(companyEntity);
 
         CalculationFreightDto calculationFreightDto = CalculationFreightDtoBuilder.getInstance().getCalculationFreightDto();
@@ -108,7 +106,7 @@ public class OrdersServiceTest {
     public void shouldNotReturnErrorWhenTheOrderWasValidInTheUpdate(){
         final OrdersRequest ordersRequest = OrdersRequestBuilder.getInstance().getOrdersRequest();
 
-        final CompanyEntity companyEntity = CompanyEntityBuilder.getBasicCompanyEntity().getCompanyEntity();
+        final CompanyEntity companyEntity = CompanyEntityBuilder.getInstance().getCompanyEntity();
         when(companyService.getCompanyEntityById(ordersRequest.getCalculationFreight().getCompany())).thenReturn(companyEntity);
 
         final OrdersEntity ordersEntity = OrdersEntityBuilder.getInstance().getOrdersEntity();

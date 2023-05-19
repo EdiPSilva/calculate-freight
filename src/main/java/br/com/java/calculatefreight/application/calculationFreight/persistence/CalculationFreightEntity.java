@@ -1,7 +1,6 @@
 package br.com.java.calculatefreight.application.calculationFreight.persistence;
 
 import br.com.java.calculatefreight.application.company.persistence.CompanyEntity;
-import br.com.java.calculatefreight.application.orders.persistence.OrdersEntity;
 import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

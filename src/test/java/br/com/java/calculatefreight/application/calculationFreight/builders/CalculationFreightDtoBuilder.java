@@ -1,11 +1,7 @@
 package br.com.java.calculatefreight.application.calculationFreight.builders;
-
 import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightDto;
-import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightEntity;
 import br.com.java.calculatefreight.application.calculationFreight.resources.CalculationFreightRequest;
 import br.com.java.calculatefreight.application.rangeFreight.builders.RangeFreightDtoBuilder;
-import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightDto;
-
 import java.time.LocalDate;
 
 public class CalculationFreightDtoBuilder {

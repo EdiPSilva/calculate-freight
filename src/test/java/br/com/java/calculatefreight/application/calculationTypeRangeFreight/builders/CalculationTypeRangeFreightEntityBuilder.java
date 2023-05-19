@@ -1,5 +1,4 @@
 package br.com.java.calculatefreight.application.calculationTypeRangeFreight.builders;
-
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeEnum;
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeRangeFreightEntity;
 import br.com.java.calculatefreight.application.freightRoute.builders.FreightRouteEntityBuilder;
@@ -24,9 +23,9 @@ public class CalculationTypeRangeFreightEntityBuilder {
         builder.calculationTypeRangeFreightEntity = CalculationTypeRangeFreightEntity.builder()
                 .id(id)
                 .calculationType(CalculationTypeEnum.CUBAGE)
-                .rangeFreightEntity(RangeFreightEntityBuilder.getBasicRangeFreightEntity().getRangeFreightEntity())
-                .typeDeliveryEntity(TypeDeliveryEntityBuilder.getBasicTypeDeliveryEntity().getTypeDeliveryEntity())
-                .freightRouteEntity(FreightRouteEntityBuilder.getBasicFreightRouteEntity().getFreightRouteEntity())
+                .rangeFreightEntity(RangeFreightEntityBuilder.getInstance().getRangeFreightEntity())
+                .typeDeliveryEntity(TypeDeliveryEntityBuilder.getInstance().getTypeDeliveryEntity())
+                .freightRouteEntity(FreightRouteEntityBuilder.getInstance().getFreightRouteEntity())
                 .dateCreate(Fuctions.getCreateDate())
                 .build();
         return builder;

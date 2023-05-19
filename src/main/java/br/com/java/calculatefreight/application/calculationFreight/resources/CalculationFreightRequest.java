@@ -4,7 +4,6 @@ import br.com.java.calculatefreight.application.calculationFreight.persistence.C
 import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightEntity;
 import br.com.java.calculatefreight.application.company.persistence.CompanyEntity;
 import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightDto;
-import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,10 +1,8 @@
 package br.com.java.calculatefreight.application.rangeFreight;
-
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.builders.CalculationTypeDtoBuilder;
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.builders.CalculationTypeRangeFreightEntityBuilder;
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeDto;
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeRangeFreightEntity;
-import br.com.java.calculatefreight.application.freightRoute.persistence.FreightRouteEntity;
 import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightDto;
 import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightEntity;
 import br.com.java.calculatefreight.application.rangeFreight.persistence.RangeFreightRepository;
@@ -16,13 +14,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -42,7 +38,7 @@ public class RangeFreightServiceTest {
     @Test
     @DisplayName("Deve retornar erro quando não for localizado o range de frete")
     public void shouldReturnErrorWhenNotFoundTheRangeFreight(){
-        final CalculationTypeDto calculationTypeDto = CalculationTypeDtoBuilder.getBasicCalculationTypeDto().getCalculationTypeDto();
+        final CalculationTypeDto calculationTypeDto = CalculationTypeDtoBuilder.getInstance().getCalculationTypeDto();
         final CalculationTypeRangeFreightEntity calculationTypeRangeFreightEntity = CalculationTypeRangeFreightEntityBuilder.getInstance().getCalculationTypeRangeFreightEntity();
         final List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList = Arrays.asList(calculationTypeRangeFreightEntity);
         final List<Long> idList = Arrays.asList(calculationTypeRangeFreightEntity.getId());
@@ -54,7 +50,7 @@ public class RangeFreightServiceTest {
     @Test
     @DisplayName("Deve retornar erro quando a transportadora estiver inativa")
     public void shouldReturnErrorWhenTheShippingCompanyIsInactive(){
-        final CalculationTypeDto calculationTypeDto = CalculationTypeDtoBuilder.getBasicCalculationTypeDto().getCalculationTypeDto();
+        final CalculationTypeDto calculationTypeDto = CalculationTypeDtoBuilder.getInstance().getCalculationTypeDto();
         final CalculationTypeRangeFreightEntity calculationTypeRangeFreightEntity = CalculationTypeRangeFreightEntityBuilder.getInstance().getCalculationTypeRangeFreightEntity();
         calculationTypeRangeFreightEntity.getRangeFreightEntity().getShippingCompanyEntity().setActive(false);
         final List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList = Arrays.asList(calculationTypeRangeFreightEntity);
@@ -67,7 +63,7 @@ public class RangeFreightServiceTest {
     @Test
     @DisplayName("Não deve retornar erro quando localizado range de frete com o intervalo de faixa")
     public void shouldNotReturnErrorWhenFoundRangeFreightWithTheStripInterval(){
-        final CalculationTypeDto calculationTypeDto = CalculationTypeDtoBuilder.getBasicCalculationTypeDto().getCalculationTypeDto();
+        final CalculationTypeDto calculationTypeDto = CalculationTypeDtoBuilder.getInstance().getCalculationTypeDto();
         final CalculationTypeRangeFreightEntity calculationTypeRangeFreightEntity = CalculationTypeRangeFreightEntityBuilder.getInstance().getCalculationTypeRangeFreightEntity();
         final RangeFreightEntity rangeFreightEntity = calculationTypeRangeFreightEntity.getRangeFreightEntity();
         setStartAndEndValue(calculationTypeDto, rangeFreightEntity);
@@ -106,7 +102,7 @@ public class RangeFreightServiceTest {
     @Test
     @DisplayName("Não deve retornar erro quando não localizado range de frete com o intervalo de faixa")
     public void shouldNotReturnErrorWhenNotFoundRangeFreightWithTheStripInterval(){
-        final CalculationTypeDto calculationTypeDto = CalculationTypeDtoBuilder.getBasicCalculationTypeDto().getCalculationTypeDto();
+        final CalculationTypeDto calculationTypeDto = CalculationTypeDtoBuilder.getInstance().getCalculationTypeDto();
         final CalculationTypeRangeFreightEntity calculationTypeRangeFreightEntity = CalculationTypeRangeFreightEntityBuilder.getInstance().getCalculationTypeRangeFreightEntity();
         final List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList = Arrays.asList(calculationTypeRangeFreightEntity);
         final List<Long> idList = Arrays.asList(calculationTypeRangeFreightEntity.getId());

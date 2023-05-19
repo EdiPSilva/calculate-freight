@@ -11,7 +11,7 @@ public class RangeFreightDtoBuilder {
 
     public static RangeFreightDtoBuilder getInstance() {
         final RangeFreightDtoBuilder builder = new RangeFreightDtoBuilder();
-        builder.rangeFreightDto = RangeFreightDto.getInstance(RangeFreightEntityBuilder.getBasicRangeFreightEntity().getRangeFreightEntity(), 0.1);
+        builder.rangeFreightDto = RangeFreightDto.getInstance(RangeFreightEntityBuilder.getInstance().getRangeFreightEntity(), 0.1);
         return builder;
     }
 

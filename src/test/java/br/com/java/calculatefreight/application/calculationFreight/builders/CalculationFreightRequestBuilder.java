@@ -1,5 +1,4 @@
 package br.com.java.calculatefreight.application.calculationFreight.builders;
-
 import br.com.java.calculatefreight.application.calculationFreight.resources.CalculationFreightRequest;
 
 public class CalculationFreightRequestBuilder {

@@ -10,7 +10,7 @@ public class CalculationTypeDtoBuilder {
 
     }
 
-    public static CalculationTypeDtoBuilder getBasicCalculationTypeDto() {
+    public static CalculationTypeDtoBuilder getInstance() {
         final CalculationTypeDtoBuilder builder = new CalculationTypeDtoBuilder();
         builder.calculationTypeDto = CalculationTypeDto.from(2D, 1D);
         return builder;

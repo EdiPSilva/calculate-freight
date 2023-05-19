@@ -1,5 +1,4 @@
 package br.com.java.calculatefreight.application.freightRoute;
-
 import br.com.java.calculatefreight.application.freightRoute.builders.FreightRouteEntityBuilder;
 import br.com.java.calculatefreight.application.freightRoute.persistence.FreightRouteEntity;
 import br.com.java.calculatefreight.application.freightRoute.persistence.FreightRouteRepository;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -41,7 +39,7 @@ public class FreightRouteServiceTest {
     @DisplayName("Não deve retornar erro quando for localizado a rota de frete por CEP")
     public void shouldNotReturnErrorWhenFoundFreightRouteByPostalCode(){
         final String postalCode = "14000000";
-        final FreightRouteEntity freightRouteEntity = FreightRouteEntityBuilder.getBasicFreightRouteEntity().getFreightRouteEntity();
+        final FreightRouteEntity freightRouteEntity = FreightRouteEntityBuilder.getInstance().getFreightRouteEntity();
         when(freightRouteRepository.findFreightRouteEntityByPostalCode(postalCode)).thenReturn(freightRouteEntity);
         compare(freightRouteEntity, assertDoesNotThrow(() -> freightRouteService.getFreightRouteEntityByPostalCode(postalCode)));
     }

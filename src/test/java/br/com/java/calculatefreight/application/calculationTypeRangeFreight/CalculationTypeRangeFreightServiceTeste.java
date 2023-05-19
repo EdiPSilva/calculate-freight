@@ -1,5 +1,4 @@
 package br.com.java.calculatefreight.application.calculationTypeRangeFreight;
-
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.builders.CalculationTypeDtoBuilder;
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.builders.CalculationTypeRangeFreightEntityBuilder;
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeDto;
@@ -12,14 +11,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,7 +35,7 @@ public class CalculationTypeRangeFreightServiceTeste {
     @Test
     @DisplayName("Deve retornar erro quando não for localizado os registros")
     public void shouldReturnErrorWhenNotFoundTheRegistris(){
-        final CalculationTypeDto calculationTypeDto = CalculationTypeDtoBuilder.getBasicCalculationTypeDto().getCalculationTypeDto();
+        final CalculationTypeDto calculationTypeDto = CalculationTypeDtoBuilder.getInstance().getCalculationTypeDto();
         final Long idFreightRoute = 1L;
         final Pageable pageable = PageRequest.of(0, 10);
         final List<CalculationTypeRangeFreightEntity> calculationTypeRangeFreightEntityList = new ArrayList<>();
@@ -50,7 +46,7 @@ public class CalculationTypeRangeFreightServiceTeste {
     @Test
     @DisplayName("Não deve retornar erro quando for localizado os registros")
     public void shouldNotReturnErrorWhenFoundTheRegistris(){
-        final CalculationTypeDto calculationTypeDto = CalculationTypeDtoBuilder.getBasicCalculationTypeDto().getCalculationTypeDto();
+        final CalculationTypeDto calculationTypeDto = CalculationTypeDtoBuilder.getInstance().getCalculationTypeDto();
         final Long idFreightRoute = 1L;
         final Pageable pageable = PageRequest.of(0, 10);
         final CalculationTypeRangeFreightEntity calculationTypeRangeFreightEntity = CalculationTypeRangeFreightEntityBuilder.getInstance().getCalculationTypeRangeFreightEntity();

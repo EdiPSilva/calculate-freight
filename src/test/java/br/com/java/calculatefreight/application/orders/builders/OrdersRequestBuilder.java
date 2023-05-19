@@ -1,5 +1,4 @@
 package br.com.java.calculatefreight.application.orders.builders;
-
 import br.com.java.calculatefreight.application.calculationFreight.builders.CalculationFreightRequestBuilder;
 import br.com.java.calculatefreight.application.orders.resources.OrdersRequest;
 

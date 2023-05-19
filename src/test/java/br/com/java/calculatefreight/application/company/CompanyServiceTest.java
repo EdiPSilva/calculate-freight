@@ -1,5 +1,4 @@
 package br.com.java.calculatefreight.application.company;
-
 import br.com.java.calculatefreight.application.company.builders.CompanyEntityBuilder;
 import br.com.java.calculatefreight.application.company.persistence.CompanyEntity;
 import br.com.java.calculatefreight.application.company.persistence.CompanyRepository;
@@ -12,9 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -47,7 +44,7 @@ public class CompanyServiceTest {
     @DisplayName("Não deve retornar erro quando o registro for encontrado")
     public void shouldNotReturnErrorWhatTheRegistryWasFound() {
         final Long id = 1l;
-        final CompanyEntity companyEntity = CompanyEntityBuilder.getBasicCompanyEntity(id).getCompanyEntity();
+        final CompanyEntity companyEntity = CompanyEntityBuilder.getInstance(id).getCompanyEntity();
         final Optional<CompanyEntity> optionalCompanyEntity = Optional.of(companyEntity);
         when(companyRepository.findById(id)).thenReturn(optionalCompanyEntity);
         compare(companyEntity, assertDoesNotThrow(() -> companyService.getCompanyEntityById(id)));

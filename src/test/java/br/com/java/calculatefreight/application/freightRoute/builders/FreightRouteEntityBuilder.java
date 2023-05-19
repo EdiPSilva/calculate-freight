@@ -1,5 +1,4 @@
 package br.com.java.calculatefreight.application.freightRoute.builders;
-
 import br.com.java.calculatefreight.application.freightRoute.persistence.FreightRouteEntity;
 import br.com.java.calculatefreight.application.freightRoute.persistence.StatesEnum;
 import br.com.java.calculatefreight.utils.Fuctions;
@@ -12,11 +11,11 @@ public class FreightRouteEntityBuilder {
 
     }
 
-    public static FreightRouteEntityBuilder getBasicFreightRouteEntity() {
-        return getBasicFreightRouteEntity(1L);
+    public static FreightRouteEntityBuilder getInstance() {
+        return getInstance(1L);
     }
 
-    public static FreightRouteEntityBuilder getBasicFreightRouteEntity(final Long id) {
+    public static FreightRouteEntityBuilder getInstance(final Long id) {
         final FreightRouteEntityBuilder builder = new FreightRouteEntityBuilder();
         builder.freightRouteEntity = FreightRouteEntity.builder()
                 .id(id)

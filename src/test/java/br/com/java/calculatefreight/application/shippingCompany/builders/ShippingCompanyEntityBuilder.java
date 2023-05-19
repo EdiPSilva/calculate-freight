@@ -11,11 +11,9 @@ public class ShippingCompanyEntityBuilder {
 
     }
 
-    public static ShippingCompanyEntityBuilder getBasicShippingCompanyEntity() {
-        return getBasicShippingCompanyEntity(1l);
-    }
+    public static ShippingCompanyEntityBuilder getInstance() { return getInstance(1l); }
 
-    public static ShippingCompanyEntityBuilder getBasicShippingCompanyEntity(final Long id) {
+    public static ShippingCompanyEntityBuilder getInstance(final Long id) {
         final ShippingCompanyEntityBuilder builder = new ShippingCompanyEntityBuilder();
         builder.shippingCompanyEntity = ShippingCompanyEntity.builder()
                 .id(id)

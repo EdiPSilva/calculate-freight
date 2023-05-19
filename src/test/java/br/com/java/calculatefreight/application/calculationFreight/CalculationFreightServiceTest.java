@@ -1,5 +1,4 @@
 package br.com.java.calculatefreight.application.calculationFreight;
-
 import br.com.java.calculatefreight.application.calculationFreight.builders.CalculationFreightEntityBuilder;
 import br.com.java.calculatefreight.application.calculationFreight.builders.CalculationFreightRequestBuilder;
 import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightDto;
@@ -9,7 +8,6 @@ import br.com.java.calculatefreight.application.calculationFreight.resources.Cal
 import br.com.java.calculatefreight.application.calculationFreight.resources.CalculationFreightResponse;
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.CalculationTypeRangeFreightService;
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.builders.CalculationTypeRangeFreightEntityBuilder;
-import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeDto;
 import br.com.java.calculatefreight.application.calculationTypeRangeFreight.persistence.CalculationTypeRangeFreightEntity;
 import br.com.java.calculatefreight.application.company.CompanyService;
 import br.com.java.calculatefreight.application.company.builders.CompanyEntityBuilder;
@@ -30,12 +28,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -70,10 +66,10 @@ public class CalculationFreightServiceTest {
     @DisplayName("Deve cadastrar o calculo de frete sem erros")
     public void shouldCadastreTheCalculationFreightWithoutErrors() {
         final CalculationFreightRequest calculationFreightRequest = CalculationFreightRequestBuilder.getInstance().getCalculationFreightRequest();
-        final CompanyEntity companyEntity = CompanyEntityBuilder.getBasicCompanyEntity().getCompanyEntity();
+        final CompanyEntity companyEntity = CompanyEntityBuilder.getInstance().getCompanyEntity();
         when(companyService.getCompanyEntityById(calculationFreightRequest.getCompany())).thenReturn(companyEntity);
 
-        final FreightRouteEntity freightRouteEntity = FreightRouteEntityBuilder.getBasicFreightRouteEntity().getFreightRouteEntity();
+        final FreightRouteEntity freightRouteEntity = FreightRouteEntityBuilder.getInstance().getFreightRouteEntity();
         when(freightRouteService.getFreightRouteEntityByPostalCode(calculationFreightRequest.getDestinyPostalCode())).thenReturn(freightRouteEntity);
 
         final CalculationTypeRangeFreightEntity calculationTypeRangeFreightEntity = CalculationTypeRangeFreightEntityBuilder.getInstance().getCalculationTypeRangeFreightEntity();
@@ -118,10 +114,10 @@ public class CalculationFreightServiceTest {
     @DisplayName("Deve atualizar o calculo de frete sem erros")
     public void shouldUpdateTheCalculationFreightWithoutErrors() {
         final CalculationFreightRequest calculationFreightRequest = CalculationFreightRequestBuilder.getInstance().getCalculationFreightRequest();
-        final CompanyEntity companyEntity = CompanyEntityBuilder.getBasicCompanyEntity().getCompanyEntity();
+        final CompanyEntity companyEntity = CompanyEntityBuilder.getInstance().getCompanyEntity();
         final Long calculationFreightEntityId = 1L;
 
-        final FreightRouteEntity freightRouteEntity = FreightRouteEntityBuilder.getBasicFreightRouteEntity().getFreightRouteEntity();
+        final FreightRouteEntity freightRouteEntity = FreightRouteEntityBuilder.getInstance().getFreightRouteEntity();
         when(freightRouteService.getFreightRouteEntityByPostalCode(calculationFreightRequest.getDestinyPostalCode())).thenReturn(freightRouteEntity);
 
         final CalculationTypeRangeFreightEntity calculationTypeRangeFreightEntity = CalculationTypeRangeFreightEntityBuilder.getInstance().getCalculationTypeRangeFreightEntity();
@@ -158,10 +154,10 @@ public class CalculationFreightServiceTest {
     @DisplayName("Deve retornar erro ao atualizar quando o calculo de frete nao for encontrado")
     public void shouldReturnErroTheUpdateWhenTheCalculationFreightNotFound() {
         final CalculationFreightRequest calculationFreightRequest = CalculationFreightRequestBuilder.getInstance().getCalculationFreightRequest();
-        final CompanyEntity companyEntity = CompanyEntityBuilder.getBasicCompanyEntity().getCompanyEntity();
+        final CompanyEntity companyEntity = CompanyEntityBuilder.getInstance().getCompanyEntity();
         final Long calculationFreightEntityId = 1L;
 
-        final FreightRouteEntity freightRouteEntity = FreightRouteEntityBuilder.getBasicFreightRouteEntity().getFreightRouteEntity();
+        final FreightRouteEntity freightRouteEntity = FreightRouteEntityBuilder.getInstance().getFreightRouteEntity();
         when(freightRouteService.getFreightRouteEntityByPostalCode(calculationFreightRequest.getDestinyPostalCode())).thenReturn(freightRouteEntity);
 
         final CalculationTypeRangeFreightEntity calculationTypeRangeFreightEntity = CalculationTypeRangeFreightEntityBuilder.getInstance().getCalculationTypeRangeFreightEntity();

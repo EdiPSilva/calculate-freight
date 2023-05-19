@@ -1,5 +1,4 @@
 package br.com.java.calculatefreight.application.company.builders;
-
 import br.com.java.calculatefreight.application.company.persistence.CompanyEntity;
 import br.com.java.calculatefreight.utils.Fuctions;
 
@@ -10,11 +9,11 @@ public class CompanyEntityBuilder {
 
     }
 
-    public static CompanyEntityBuilder getBasicCompanyEntity() {
-        return getBasicCompanyEntity(1l);
+    public static CompanyEntityBuilder getInstance() {
+        return getInstance(1l);
     }
 
-    public static CompanyEntityBuilder getBasicCompanyEntity(final Long id) {
+    public static CompanyEntityBuilder getInstance(final Long id) {
         final CompanyEntityBuilder builder = new CompanyEntityBuilder();
         builder.companyEntity = CompanyEntity.builder()
                 .id(id)

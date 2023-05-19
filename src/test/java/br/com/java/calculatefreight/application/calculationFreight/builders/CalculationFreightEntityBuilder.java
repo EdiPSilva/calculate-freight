@@ -1,11 +1,9 @@
 package br.com.java.calculatefreight.application.calculationFreight.builders;
-
 import br.com.java.calculatefreight.application.calculationFreight.persistence.CalculationFreightEntity;
 import br.com.java.calculatefreight.application.calculationFreight.resources.CalculationFreightRequest;
 import br.com.java.calculatefreight.application.company.builders.CompanyEntityBuilder;
 import br.com.java.calculatefreight.application.rangeFreight.builders.RangeFreightEntityBuilder;
 import br.com.java.calculatefreight.utils.Fuctions;
-
 import java.time.LocalDate;
 
 public class CalculationFreightEntityBuilder {
@@ -20,8 +18,8 @@ public class CalculationFreightEntityBuilder {
         final CalculationFreightEntityBuilder builder = new CalculationFreightEntityBuilder();
         builder.calculationFreightEntity = CalculationFreightEntity.builder()
                 .id(1L)
-                .companyEntity(CompanyEntityBuilder.getBasicCompanyEntity().getCompanyEntity())
-                .rangeFreightEntity(RangeFreightEntityBuilder.getBasicRangeFreightEntity().getRangeFreightEntity())
+                .companyEntity(CompanyEntityBuilder.getInstance().getCompanyEntity())
+                .rangeFreightEntity(RangeFreightEntityBuilder.getInstance().getRangeFreightEntity())
                 .delivaryDay(LocalDate.now())
                 .destinyPostalCode("14000001")
                 .width(3.0)
@@ -39,8 +37,8 @@ public class CalculationFreightEntityBuilder {
         final CalculationFreightEntityBuilder builder = new CalculationFreightEntityBuilder();
         builder.calculationFreightEntity = CalculationFreightEntity.builder()
                 .id(1L)
-                .companyEntity(CompanyEntityBuilder.getBasicCompanyEntity().getCompanyEntity())
-                .rangeFreightEntity(RangeFreightEntityBuilder.getBasicRangeFreightEntity().getRangeFreightEntity())
+                .companyEntity(CompanyEntityBuilder.getInstance().getCompanyEntity())
+                .rangeFreightEntity(RangeFreightEntityBuilder.getInstance().getRangeFreightEntity())
                 .delivaryDay(LocalDate.now())
                 .destinyPostalCode(calculationFreightRequest.getDestinyPostalCode())
                 .width(calculationFreightRequest.getWidth())

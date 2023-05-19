@@ -1,6 +1,5 @@
 package br.com.java.calculatefreight.application.rangeFreight.persistence;
 
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter
