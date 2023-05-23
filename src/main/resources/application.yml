@@ -20,7 +20,7 @@ spring:
     password: 1234
     type: com.zaxxer.hikari.HikariDataSource
   jpa:
-    show-sql: true
+    show-sql: false
     open-in-view: false
     properties:
       hibernate:
