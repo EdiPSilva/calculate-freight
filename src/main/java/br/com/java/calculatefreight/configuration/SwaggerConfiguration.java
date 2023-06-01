@@ -16,7 +16,7 @@ public class SwaggerConfiguration {
 
     private final String NAME_APPLICATION = "Calculate Freight";
 
-    private final String DESCRIPTION = "Aplicação responsável por alimentar a base de cálculo de frete.";
+    private final String DESCRIPTION = "Aplicação responsável por realizar o cálculo de frete.";
 
     private final String PACKAGE = "br.com.java.calculatefreight.application";
 

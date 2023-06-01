@@ -24,3 +24,21 @@ A aplicação roda na porta `8081`, então para acessar a documentação do **Sw
 ```
 http://localhost:8081/swagger-ui.html
 ```
+### Para criar um container da aplicação
+* Primeiro é necessário obter o ip do container do postgres
+```
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_id>
+```
+* Depois acesse o arquivo application.yml na pasta resources do projeto e atualize o host da url jdbc
+```
+url: jdbc:postgresql://<container_ip>:5432/data_calculate_freight
+```
+* Execute o clean e build da aplicação
+* Crie a imagem da aplicação com base no arquivo Dockerfile
+```
+docker build -t cf-img .
+```
+* Crie o containe da aplicação apontando a mesma rede que o container do postgres
+``` 
+docker run -p 8081:8081 --name=cf-app --network=database-docker_postgres-compose-network cf-img
+```

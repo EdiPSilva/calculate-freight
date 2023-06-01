@@ -15,7 +15,7 @@ spring:
       maximum-pool-size: 10
       auto-commit: false
       connection-timeout: 3000
-    url: "jdbc:postgresql://localhost:5432/data_calculate_freight"
+    url: jdbc:postgresql://172.18.0.2:5432/data_calculate_freight
     username: postgres
     password: 1234
     type: com.zaxxer.hikari.HikariDataSource
